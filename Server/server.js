@@ -17,7 +17,7 @@ app.use(authorizeUser)
 app.get('/',(req,res)=>{
     res.send('Hello from server')
 })
-console.log('hi')
+
 app.use('/user',userRouter)
 app.use('/blogs',blogsRouter)
 app.use('/category',categoryRouter)

@@ -36,10 +36,10 @@ router.get('/all',(req,res)=>{
 
 
 router.put('/update',(req,res)=>{
-    const {blog_id, title,contents } =  req.body;
-   const sql = 'UPDATE blogs SET title = ? , contents = ? WHERE blog_id = ?'
+    const {blog_id, title } =  req.body;
+   const sql = 'UPDATE blogs SET title = ? WHERE blog_id = ?'
 
-   pool.query(sql, [title,contents,blog_id], (err, data) => {
+   pool.query(sql, [title,blog_id], (err, data) => {
     res.send(result.createResult(err, data))
     })
 })
@@ -47,25 +47,36 @@ router.put('/update',(req,res)=>{
 
 // // delete by id
 
-router.delete('/delete',(req,res)=>{
-    const { blog_id} =  req.body
-   const sql = 'DELETE FROM blogs WHERE blog_id = ?'
+router.delete('/delete/:cid',(req,res)=>{
+    const blog_id  =  req.params.cid
+ const sql = 'DELETE FROM blogs WHERE blog_id = ?'
 
-   pool.query(sql, [blog_id], (err, data) => {
-    res.send(result.createResult(err, data))
-    })
+ pool.query(sql, [blog_id], (err, data) => {
+  res.send(result.createResult(err, data))
+  })
 })
+
 
 // find by title
 
-router.post('/find',(req,res)=>{
-    const { title} =  req.body
-    const sql= `SELECT * FROM blogs WHERE title = ?`
+router.post('/find', (req, res) => {
+    const { title } = req.body;
 
-    pool.query(sql,[title],(err,data)=>{
+    const sql = `SELECT * FROM blogs WHERE title LIKE ?`;
+
+    pool.query(sql, [`%${title}%`], (err, data) => {
+        res.send(result.createResult(err, data));
+    });
+});
+
+
+router.get('/byuser',(req,res)=>{
+    const sql =`SELECT * FROM blogs WHERE user_id =?`
+        const user_id = req.headers.user_id
+    pool.query(sql,[user_id],(err,data)=>{
         res.send(result.createResult(err,data))
     })
-
 })
+
 
 module.exports = router

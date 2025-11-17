@@ -58,8 +58,10 @@ router.put('/update',(req,res)=>{
 // }
 
 
-router.delete('/delete',(req,res)=>{
-    const { category_id,title } =  req.body;
+router.delete('/delete/:cid',(req,res)=>{
+
+    const category_id = req.params.cid
+
    const sql = 'DELETE FROM categories WHERE category_id = ?'
 
    pool.query(sql, [category_id], (err, data) => {
