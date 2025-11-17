@@ -55,9 +55,7 @@ function AllBlogs() {
         <tbody>
           {allBlogs.length === 0 ? (
             <tr>
-              <td colSpan="2" className="text-center">
-                No Blogs Found
-              </td>
+              <td colSpan="2" className="text-center">  No Blogs Found</td>
             </tr>
           ) : (
             allBlogs.map((blog) => (

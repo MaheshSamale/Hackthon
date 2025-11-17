@@ -35,8 +35,6 @@ const AddBlog = () => {
 
     if (result.status === 'success') {
       toast.success('Blog Added Successfully')
-
-      // Reset form
       setTitle('')
       setContent('')
       setCategory_id('')
@@ -50,37 +48,20 @@ const AddBlog = () => {
       <div className="container w-50 border border-secondary p-4">
 
         <h3 className="text-center">Add Blog</h3>
-
-        {/* BLOG TITLE */}
         <div className="mb-3 mt-3">
           <label className="form-label">Title</label>
-          <input
-            type="text"
-            className="form-control"
-            value={title}
-            onChange={e => setTitle(e.target.value)}
-          />
+          <input  type="text" className="form-control"  value={title} onChange={e => setTitle(e.target.value)} />
         </div>
-
-        {/* BLOG DESCRIPTION */}
         <div className="mb-3">
           <label className="form-label">Description</label>
-          <textarea
-            className="form-control"
-            rows="4"
-            value={content}
-            onChange={e => setContent(e.target.value)}
-          ></textarea>
+          <textarea  className="form-control" rows="4" value={content} onChange={e => setContent(e.target.value)}></textarea>
         </div>
-
-        {/* CATEGORY DROPDOWN */}
         <div className="mb-3">
           <label className="form-label">Select Category</label>
           <select
             className="form-select"
             value={category_id}
-            onChange={(e) => setCategory_id(e.target.value)}
-          >
+            onChange={(e) => setCategory_id(e.target.value)}>
             <option value="">-- Select Category --</option>
 
             {categories.map((c) => (
@@ -90,11 +71,7 @@ const AddBlog = () => {
             ))}
           </select>
         </div>
-
-        {/* SUBMIT BUTTON */}
-        <button className="btn btn-success w-100" onClick={addBlogs}>
-          Add Blog
-        </button>
+        <button className="btn btn-success w-100" onClick={addBlogs}> Add Blog </button>
 
       </div>
     </div>
