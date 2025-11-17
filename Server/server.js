@@ -2,6 +2,8 @@ const express = require('express')
 const cors = require('cors')
 
 const userRouter = require('./router/user')
+const blogsRouter = require('./router/blogs')
+const categoryRouter = require('./router/categories')
 const authorizeUser = require('./utils/authuser')
 const pool = require('./utils/db')
 
@@ -17,6 +19,8 @@ app.get('/',(req,res)=>{
 })
 console.log('hi')
 app.use('/user',userRouter)
+app.use('/blogs',blogsRouter)
+app.use('/category',categoryRouter)
 
 const port = 4000
 app.listen(port , 'localhost',()=>{
