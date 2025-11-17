@@ -9,6 +9,10 @@ const config = require('../utils/config')
 const router = express.Router()
 
 // ADD NEW CATEGORY
+//  {
+//     "title":"Technology23",
+//     "description":"new te2ch ai"
+// }
 
 router.post('/add',(req,res)=>{
     const { title , description } = req.body
@@ -19,6 +23,10 @@ router.post('/add',(req,res)=>{
     })
 })
 
+
+// get all
+
+
 router.get('/all',(req,res)=>{
     const sql =`SELECT * FROM categories`
     pool.query(sql,(err, data)=>{
@@ -26,9 +34,37 @@ router.get('/all',(req,res)=>{
     })
 })
 
+
+// update title by id
+
+// {
+//     "category_id":1,
+//     "title":"new TECH"
+// }
+
 router.put('/update',(req,res)=>{
-   const sql = 'UPDAT'
+    const { category_id,title } =  req.body;
+   const sql = 'UPDATE categories SET title = ? WHERE category_id = ?'
+
+   pool.query(sql, [title,category_id], (err, data) => {
+    res.send(result.createResult(err, data))
+    })
 })
 
+
+// // delete by id
+// {
+//     "category_id":1
+// }
+
+
+router.delete('/delete',(req,res)=>{
+    const { category_id,title } =  req.body;
+   const sql = 'DELETE FROM categories WHERE category_id = ?'
+
+   pool.query(sql, [category_id], (err, data) => {
+    res.send(result.createResult(err, data))
+    })
+})
 
 module.exports = router
