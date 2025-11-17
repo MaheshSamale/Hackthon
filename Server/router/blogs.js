@@ -47,15 +47,25 @@ router.put('/update',(req,res)=>{
 
 // // delete by id
 
-
-
 router.delete('/delete',(req,res)=>{
-    const { blog_id} =  req.body;
+    const { blog_id} =  req.body
    const sql = 'DELETE FROM blogs WHERE blog_id = ?'
 
    pool.query(sql, [blog_id], (err, data) => {
     res.send(result.createResult(err, data))
     })
+})
+
+// find by title
+
+router.post('/find',(req,res)=>{
+    const { title} =  req.body
+    const sql= `SELECT * FROM blogs WHERE title = ?`
+
+    pool.query(sql,[title],(err,data)=>{
+        res.send(result.createResult(err,data))
+    })
+
 })
 
 module.exports = router
