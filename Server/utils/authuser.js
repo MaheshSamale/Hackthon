@@ -10,10 +10,14 @@ function authorizeUser(req, res, next) {
     }
     else {
         const token = req.headers.token
+        console.log(token)
         if (token) {
             try {
                 const payload = jwt.verify(token, config.SECRET)
-                req.headers.uid = payload.uid
+                console.log(payload)
+                req.headers.user_id = payload.user_id
+                console.log(payload.user_id)
+                console.log(req.headers.user_id)
                 next()
             } catch (ex) {
                 res.send(result.createResult('Invalid Token'))

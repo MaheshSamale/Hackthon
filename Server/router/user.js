@@ -20,7 +20,7 @@ router.post('/login', (req, res) => {
             bcrypt.compare(password, data[0].password, (err, passwordStatus) => {
                 if (passwordStatus) {
                     const payload = {
-                        uid: data[0].uid,
+                        user_id: data[0].user_id,
                     }
                     const token = jwt.sign(payload, config.SECRET)
                     const user = {
@@ -62,9 +62,9 @@ router.get('/', (req, res) => {
 })
 
 router.get('/profile/', (req, res) => {
-    const uid = req.headers.uid
-    const sql = `SELECT * FROM users WHERE uid = ?`
-    pool.query(sql, [uid], (err, data) => {
+    const user_id = req.headers.user_id
+    const sql = `SELECT * FROM users WHERE user_id = ?`
+    pool.query(sql, [user_id], (err, data) => {
         if (err)
             res.send(result.createResult(err))
         else {
@@ -82,17 +82,17 @@ router.get('/profile/', (req, res) => {
 
 router.put('/', (req, res) => {
     const { phone_no } = req.body
-    const uid = req.headers.uid
-    const sql = `UPDATE users SET phone_no = ? WHERE uid = ?`
-    pool.query(sql, [phone_no, uid], (err, data) => {
+    const user_id = req.headers.user_id
+    const sql = `UPDATE users SET phone_no = ? WHERE user_id = ?`
+    pool.query(sql, [phone_no, user_id], (err, data) => {
         res.send(result.createResult(err, data))
     })
 })
 
 router.delete('/', (req, res) => {
-    const uid = req.body.uid
-    const sql = `DELETE FROM users WHERE uid = ?`
-    pool.query(sql, [uid], (err, data) => {
+    const user_id = req.body.user_id
+    const sql = `DELETE FROM users WHERE user_id = ?`
+    pool.query(sql, [user_id], (err, data) => {
         res.send(result.createResult(err, data))
     })
 })
