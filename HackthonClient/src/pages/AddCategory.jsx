@@ -22,6 +22,10 @@ const AddCategory = () => {
     }
   
    const addCategoryName = async () => {
+    if (!title || !description) {
+      toast.error("Please fill all fields")
+      return
+    }
         const result = await addCategoryTitleDesc(title,description)
         if (result.status == 'success'){
            toast.success('Category Added')
@@ -45,6 +49,10 @@ const AddCategory = () => {
       setTitle(c.title)
       setDescription(c.description)
       const title = prompt("Enter the Title")
+      if (!title) {
+        toast.error("Please Enter the Title")
+        return
+      }
       const result = await upadte(c.category_id,title)
       console.log(title)
       console.log(c.category_id)
@@ -74,27 +82,37 @@ const AddCategory = () => {
                 </div>
             </div>
         </div>
-         <table className="table">
-          <thead>
-            <tr>
-              <th scope="col">Category ID</th>
-              <th scope="col">Title</th>
-              <th scope="col">Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            {categories.map((c) => (
-              <tr>
-                <td scope="row" >{c.category_id}</td>
-                <td>{c.title}</td>
-                <td>{c.description}</td>
-                <td><button onClick={() => updateCategory(c)} >edit</button></td>
-                <td><button onClick={() => deleteCategorys(c.category_id)}>delete</button></td>
+        <div className="row">
+  {categories.length === 0 ? (
+    <div className="col-12 text-center">
+      <h5>No Categories Found</h5>
+    </div>
+  ) : (
+    categories.map((c) => (
+      <div className="col-md-4 mb-4" key={c.category_id}>
+        <div className="card shadow-sm border-0 rounded-3">
+          <div className="card-body">
 
-              </tr>
-            ))}
-          </tbody>
-        </table>
+            <h5 className="card-title fw-bold"> {c.title}</h5>
+
+            <p className="text-muted mb-1" style={{ fontSize: "0.85rem" }}> <strong>ID:</strong> {c.category_id} </p>
+
+            <p className="card-text text-secondary" style={{ fontSize: "0.95rem" }}>  {c.description}</p>
+            <hr />
+
+            <div className="d-flex justify-content-between">
+              <button  className="btn btn-sm btn-outline-primary"  onClick={() => updateCategory(c)} >  Edit</button>
+
+              <button className="btn btn-sm btn-outline-danger"  onClick={() => deleteCategorys(c.category_id)} >  Delete </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    ))
+  )}
+</div>
+
     </div>
   )
 }

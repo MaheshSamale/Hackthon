@@ -52,3 +52,17 @@ export async function updateUser(phone_no) {
         toast.error(error)
     }
 }
+
+
+export async function getUsers() {
+    try {
+        const url = config.BASE_URL + '/user/'
+        const headers = {
+            token: window.sessionStorage.getItem('token')
+        }
+        const response = await axios.get(url, { headers })
+        return response.data
+    } catch (error) {
+        toast.error(error)
+    }
+}

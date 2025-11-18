@@ -26,6 +26,10 @@ const MyBlogs = () => {
       console.log(c)
       setTitle(c.title)
       const title = prompt("Enter the Title")
+      if (!title) {
+        toast.error("Please Enter the Title")
+        return
+      }
       const result = await upadte(c.blog_id,title)
       if (result.status == 'success'){
          toast.success('Title Updated')
@@ -47,27 +51,35 @@ const MyBlogs = () => {
 
         
   return (
-  <div>
-    
-         <table className="table">
-          <thead>
-            <tr>
-              <th scope="col">Title</th>
-              <th scope="col">Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            {blogs.map((c) => (
-              <tr>
-                <td scope="row" >{c.title}</td>
-                <td>{c.contents}</td>
-                <td><button onClick={() => updateBlog(c)} >edit</button></td>
-                <td><button onClick={() => deleteBlog(c.blog_id)}>delete</button></td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-    </div>
+    <div className="row mt-3 ms-3">
+    {blogs.length === 0 ? (
+      <div className="col-12 text-center">
+        <h5>No Blogs Found</h5>
+      </div>
+    ) : (
+      blogs.map((c) => (
+        <div className="col-md-4 mb-4" key={c.blog_id}>
+          <div className="card shadow-sm border-0 rounded-3">
+            <div className="card-body">
+
+              <h5 className="card-title fw-bold">{c.title} </h5>
+
+              <p className="card-text text-secondary" style={{ fontSize: "0.95rem" }}>  {c.contents} </p>
+  
+              <hr />
+              <div className="d-flex justify-content-between">
+                <button  className="btn btn-sm btn-outline-primary" onClick={() => updateBlog(c)}>  Edit </button>
+  
+                <button className="btn btn-sm btn-outline-danger"  onClick={() => deleteBlog(c.blog_id)}> Delete </button>
+              </div>
+  
+            </div>
+          </div>
+        </div>
+      ))
+    )}
+  </div>
+  
   )
 }
 
