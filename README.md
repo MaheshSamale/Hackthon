@@ -50,5 +50,9 @@ A full-stack Blog Management System built in 6 hours for a hackathon, using **Re
 ### Search Blogs by Keyword
 ![Search By KeyWord](./screenshots/Search%20By%20KeyWord.png)
 
+## Build By
+
+- **Mahesh Samale** – [@MaheshSamale](https://github.com/MaheshSamale)  
+- **Rutuja Jadhav** – [@Rutuja-coder08](https://github.com/Rutuja-coder08)
 
 
