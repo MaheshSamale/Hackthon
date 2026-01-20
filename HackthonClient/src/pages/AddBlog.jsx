@@ -30,9 +30,8 @@ const AddBlog = () => {
       toast.error("Please fill all fields")
       return
     }
-
     const result = await addBlog(title, content, category_id)
-
+    console.log("Add Blog Result:", result)
     if (result.status === 'success') {
       toast.success('Blog Added Successfully')
       setTitle('')

@@ -8,6 +8,7 @@ import AddBlog from './pages/AddBlog';
 import AddCategory from './pages/AddCategory';
 import MyBlogs from './pages/MyBlogs';
 import AllBlogs from './pages/AllBlogs'
+import Profile from './pages/Profile';
 
 export const UserContext = createContext()
 function App() {
@@ -24,6 +25,7 @@ function App() {
             <Route path='addblogs' element={<AddBlog />} />
             <Route path='addcategory' element={<AddCategory />} />
             <Route path='myblogs' element={<MyBlogs />} />
+            <Route path='profile' element={<Profile />} />
           </Route>
 
         </Routes>

@@ -15,9 +15,9 @@ function Profile() {
         const result = await getProfile()
         if (result.status == 'success') {
             const user = result.data
-            setName(user.name)
+            setName(user.full_name)
             setEmail(user.email)
-            setMobile(user.mobile)
+            setMobile(user.phone_no)
         }
         else
             toast.error(result.error)

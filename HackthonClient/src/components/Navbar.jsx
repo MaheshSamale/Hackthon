@@ -24,6 +24,7 @@ function Navbar() {
                         <Link className="nav-link" to="/home/addblogs">Add Blogs</Link>
                         <Link className="nav-link" to="/home/addcategory">Add Category</Link>
                         <Link className="nav-link" to="/home/myblogs">My Blogs</Link>
+                        <Link className="nav-link" to="/home/profile">Profile</Link>
                         <button className="nav-link" onClick={logout} >Logout</button>
                     </div>
                 </div>
