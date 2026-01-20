@@ -22,7 +22,7 @@ app.use('/user',userRouter)
 app.use('/blogs',blogsRouter)
 app.use('/category',categoryRouter)
 
-const port = 4000
-app.listen(port , 'localhost',()=>{
-    console.log(`server is running on ${port}`)
+ const port = 4000
+app.listen(port ,'0.0.0.0',()=>{
+    console.log(`server is running`)
 })
