@@ -4,7 +4,6 @@ const cors = require('cors')
 const userRouter = require('./router/user')
 const blogsRouter = require('./router/blogs')
 const categoryRouter = require('./router/categories')
-const authorizeUser = require('./utils/authuser')
 const pool = require('./utils/db')
 
 const app = express()
@@ -13,7 +12,6 @@ const app = express()
 
 app.use(cors())
 app.use(express.json())
-app.use(authorizeUser) 
 app.get('/',(req,res)=>{
     res.send('Hello from server')
 })
