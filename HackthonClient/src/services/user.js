@@ -17,7 +17,8 @@ export async function loginUser(email, password) {
 export async function registerUser(full_name, email, password, phone_no) {
     try {
         // const url = config.BASE_URL + '/user/register'
-        const url = 'http://localhost:4000/user/register'
+             const url = config.BASE_URL + '/user/register'
+        // const url = 'http://localhost:4000/user/register'
         const body = { full_name, email, password, phone_no }
         const response = await axios.post(url, body)
         return response.data
