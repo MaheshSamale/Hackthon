@@ -16,6 +16,25 @@ app.get('/',(req,res)=>{
     res.send('Hello from server')
 })
 
+app.get('/test-db', async (req, res) => {
+    try {
+        // Since you're using /promise in your db.js, we use await
+        const [rows] = await pool.query('SELECT 1 + 1 AS solution');
+        res.json({
+            status: 'success',
+            message: 'Database connected successfully!',
+            data: rows[0]
+        });
+    } catch (err) {
+        console.error('Database connection error:', err);
+        res.status(500).json({
+            status: 'error',
+            message: 'Failed to connect to database',
+            error: err.message
+        });
+    }
+});
+
 app.use('/user',userRouter)
 app.use('/blogs',blogsRouter)
 app.use('/category',categoryRouter)
