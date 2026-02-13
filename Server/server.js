@@ -10,7 +10,16 @@ const app = express()
 
 
 
-app.use(cors())
+// Replace your old app.use(cors()) with this:
+app.use(cors({
+  origin: 'https://hackthon-one-sable.vercel.app', // Your frontend URL
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'token'], // <--- ADD 'token' HERE
+  credentials: true
+}));
+
+// Very important: Handle the preflight OPTIONS request globally
+app.options('*', cors());
 app.use(express.json())
 app.get('/',(req,res)=>{
     res.send('Hello from server')
