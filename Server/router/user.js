@@ -61,7 +61,7 @@ router.get('/', (req, res) => {
     })
 })
 
-router.get('/profile/', (req, res) => {
+router.get('/profile', (req, res) => {
     const user_id = req.headers.user_id
     const sql = `SELECT * FROM users WHERE user_id = ?`
     pool.query(sql, [user_id], (err, data) => {
